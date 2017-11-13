@@ -5,16 +5,20 @@
 using namespace std;
 
 vector < vector <Pixel> > bmpComp;
-Pixel rgb;
+Pixel rgbC, rgbAdd;
 int maxImg = 10;
+int imgX = 400;
+int imgY = 600;
+int enteredImgs = 0;
 
+void vectInitilizer();
 void average(Pixel &, int,int,int);
 void picAdder(vector < vector < Pixel > >);
 bool picSizeCheck(vector < vector < Pixel > >);
 
 int main()
 {
-
+    vectInitilizer();
     cout<< "Enter up to "<<maxImg<<" photos"<<endl;
     for (int index = 0; index < maxImg; index++)
     {
@@ -33,24 +37,46 @@ int main()
                 picAdder (bmp);
             }
             else isImg = false;
+            enteredImgs++;
        }
        else if (isImg == false)
        {
             cout<< "Invalid photo." <<endl;
             index = index - 1;
        }
-       else break;
+       else index = 11;
     }       
 
 }
 
+void vectInitilizer()
+{
+    bmpComp.resize(imgX);
+    for (int index = 0; index < imgX; index++)
+    {
+        bmpComp[index].resize(imgY);
+    }
+}
+
 bool picSizeCheck(vector < vector < Pixel > > bmp)
 {
-    if (bmp.size() == 399 && bmp[0].size() == 599) return true;
+    if (bmp.size() == 400 && bmp[0].size() == 600) return true;
     else return false;
 }
+
 void picAdder(vector < vector < Pixel > > bmp)
 {
+    for (int index = 0; index < bmpComp.size(); index++)
+    {
+        for (int index2 = 0; index2 < bmpComp[index].size(); index2++)
+        {
+            rgbC = bmpComp[index][index2]; 
+            rgbAdd = bmp[index][index2];
+            rgbC.red = rgbC.red + rgbAdd.red;
+            rgbC.green = rgbC.green + rgbAdd.green;
+            rgbC.blue = rgbC.blue + rgbAdd.blue;
+        }
+    }
 }
 
 // ask for an image 10 times or until user stops providing images

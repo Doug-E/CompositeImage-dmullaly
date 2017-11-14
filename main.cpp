@@ -56,12 +56,12 @@ int main()
 
 
         }       
-        if (enteredImgs = 1)
+        Done:
+        if (enteredImgs <= 1)
         {
                 cout<< "Too few photos to make composition. Ending program." <<endl;
                 goto NoRun;
         }
-        Done:
         picAdder();
         picAverager();
         NoRun:
